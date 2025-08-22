@@ -24,7 +24,6 @@
                 <a href="#about" class="nav-link">About</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
-                
             <div class="mobile-menu-toggle">
                 <span></span>
                 <span></span>
@@ -43,14 +42,7 @@
             </div>
             <div class="hero-visual">
                 <div class="hero-logo">
-                    <div class="logo-container">
-                        <div class="main-logo">
-                            <div class="logo-anchor">
-                                <img src="AIAnchor.jpg" alt="AIAnchor Logo" class="logo-image">
-                            </div>
-                           
-                            </div>
-                    </div>
+                    <img src="AIAnchor.jpg" alt="AIAnchor Logo" class="logo-image">
                 </div>
             </div>
         </div>
@@ -170,35 +162,63 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials">
+    <section class="testimonials-section">
         <div class="container">
-            <h2 class="section-title">What Our Clients Say</h2>
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    <p class="testimonial-text">"AIAnchor transformed our workflow – we saved 10+ hours per week!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
+            <div class="testimonials-header">
+                <h2 class="testimonials-title">What Our Clients Say</h2>
+                <p class="testimonials-subtitle">Trusted by brands who scale smarter with AI.</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" fill="#00D4FF"/>
+                            </svg>
                         </div>
-                        <div class="author-info">
-                            <h4 class="author-name">Business Owner</h4>
-                            <p class="author-title">CEO, Tech Solutions Inc.</p>
+                        <blockquote class="testimonial-quote">
+                            "I tried a marketing agency for the first time ever with you guys and was expecting so much less and would've been ok with so less, but I can see that you guys put in the time to do great work and maintain a great relationship with the client you are working with."
+                        </blockquote>
+                        <div class="testimonial-footer">
+                            <div class="business-name">Codename X</div>
+                            <div class="accent-line"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="client-logos">
-                <div class="logo-placeholder">
-                    <i class="fas fa-building"></i>
-                    <span>Client Logo</span>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" fill="#00D4FF"/>
+                            </svg>
+                        </div>
+                        <blockquote class="testimonial-quote">
+                            "You guys have been amazing to work with, I appreciate the effort you put into helping with my brand."
+                        </blockquote>
+                        <div class="testimonial-footer">
+                            <div class="business-name">TemperOfficial</div>
+                            <div class="accent-line"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="logo-placeholder">
-                    <i class="fas fa-building"></i>
-                    <span>Client Logo</span>
-                </div>
-                <div class="logo-placeholder">
-                    <i class="fas fa-building"></i>
-                    <span>Client Logo</span>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" fill="#00D4FF"/>
+                            </svg>
+                        </div>
+                        <blockquote class="testimonial-quote">
+                            "Working with AiAnchor has been a seamless and enjoyable experience. Their team is not only knowledgeable and professional, but also friendly and responsive. They are always available to address my questions, concerns, and ideas promptly, making me feel valued as a client."
+                        </blockquote>
+                        <div class="testimonial-footer">
+                            <div class="business-name">Hearth&Haven</div>
+                            <div class="accent-line"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -221,7 +241,7 @@
                     </ul>
                 </div>
                 
-                <form id="contactForm" class="contact-form">
+                <form id="contactForm" class="contact-form" action="https://formspree.io/f/xnnzezlo" method="POST">
                     <div class="form-group">
                         <label for="name">Full Name *</label>
                         <input type="text" id="name" name="name" required>
@@ -253,8 +273,14 @@
             
             <div id="formSuccess" class="form-success" style="display: none;">
                 <i class="fas fa-check-circle"></i>
-                <h3>Thank you!</h3>
-                <p>We will contact you within 24 hours to schedule your free AI strategy call.</p>
+                <h3>✅ Thanks for reaching out!</h3>
+                <p>We'll get back to you soon.</p>
+            </div>
+            
+            <div id="formError" class="form-error" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>⚠️ Oops, something went wrong.</h3>
+                <p>Please try again.</p>
             </div>
         </div>
     </section>
@@ -279,10 +305,10 @@
                     <span class="logo-text">AIAnchor</span>
                 </div>
                 <div class="social-links">
-                    <a href="https://instagram.com/aianchor_" target="_blank" class="social-link">
+                    <a href="https://instagram.com/aianchor" target="_blank" class="social-link">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://linkedin.com/company/aianchor_" target="_blank" class="social-link">
+                    <a href="https://linkedin.com/company/aianchor" target="_blank" class="social-link">
                         <i class="fab fa-linkedin"></i>
                     </a>
                     <a href="mailto:hello@aianchor.com" class="social-link">
@@ -299,6 +325,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-

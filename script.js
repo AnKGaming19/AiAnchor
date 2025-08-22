@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Contact form submission
     const contactForm = document.getElementById('contactForm');
     const formSuccess = document.getElementById('formSuccess');
+    const formError = document.getElementById('formError');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -49,34 +50,60 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Get form data
             const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData);
             
             // Validate required fields
-            if (!data.name || !data.email || !data.company || !data.message) {
-                alert('Please fill in all required fields.');
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const company = formData.get('company');
+            const message = formData.get('message');
+            
+            if (!name || !email || !company || !message) {
+                showError('Please fill in all required fields.');
                 return;
             }
             
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data.email)) {
-                alert('Please enter a valid email address.');
+            if (!emailRegex.test(email)) {
+                showError('Please enter a valid email address.');
                 return;
             }
             
-            // Send email using EmailJS or similar service
-            sendEmail(data);
-            
-            // Show success message
-            contactForm.style.display = 'none';
-            formSuccess.style.display = 'block';
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Scroll to success message
-            formSuccess.scrollIntoView({ behavior: 'smooth' });
+            // Submit to Formspree
+            fetch('https://formspree.io/f/xnnzezlo', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    showSuccess();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError('Oops, something went wrong. Please try again.');
+            });
         });
+    }
+    
+    function showSuccess() {
+        contactForm.style.display = 'none';
+        formError.style.display = 'none';
+        formSuccess.style.display = 'block';
+        contactForm.reset();
+        formSuccess.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function showError(message) {
+        formError.querySelector('p').textContent = message;
+        formSuccess.style.display = 'none';
+        formError.style.display = 'block';
+        formError.scrollIntoView({ behavior: 'smooth' });
     }
     
     // Header scroll effect
@@ -135,49 +162,7 @@ function scrollToContact() {
     }
 }
 
-// Email sending function
-function sendEmail(data) {
-    // Option 1: Using PHP backend (recommended for production)
-    fetch('process-form.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            console.log('Email sent successfully:', result.message);
-        } else {
-            console.error('Email failed to send:', result.error);
-            // Fallback to mailto if PHP fails
-            fallbackMailto(data);
-        }
-    })
-    .catch(error => {
-        console.error('Network error:', error);
-        // Fallback to mailto if network fails
-        fallbackMailto(data);
-    });
-}
 
-// Fallback mailto function
-function fallbackMailto(data) {
-    const subject = 'New AI Strategy Call Request - AIAnchor';
-    const body = `
-Name: ${data.name}
-Email: ${data.email}
-Company: ${data.company}
-Phone: ${data.phone || 'Not provided'}
-
-Message:
-${data.message}
-    `;
-    
-    const mailtoLink = `mailto:hello@aianchor.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(mailtoLink);
-}
 
 // Add CSS for animations
 const style = document.createElement('style');
