@@ -1,5 +1,5 @@
 // ===== ZOHO FLOW CONFIGURATION =====
-const ZOHO_FLOW_WEBHOOK = "https://flow.zoho.com/XXXX/flow/webhook/incoming?zapikey=YOUR_KEY";
+const ZOHO_FLOW_WEBHOOK = "https://flow.zoho.eu/20108451502/flow/webhook/incoming?zapikey=1001.6852a77a4e7cd857efd274c55bd5a711.19facefdd4557bf7a90eb2e64abe8950&isdebug=false";
 
 // ===== DOM CONTENT LOADED =====
 document.addEventListener('DOMContentLoaded', function() {
@@ -445,3 +445,4 @@ window.AIAnchor = {
     showAlert,
     trackEvent
 };
+
