@@ -19,7 +19,7 @@
 
 // Configuration
 $ownerEmail = "info@aianchor.online";
-$fromDomain = "aianchor.online";
+$fromDomain = "www.aianchor.online";
 $noReplyEmail = "no-reply@aianchor.online";
 
 // Security: Check for honeypot
@@ -96,3 +96,4 @@ mail($email, $leadSubject, $leadBody, $leadHeaders);
 http_response_code(200);
 echo "OK";
 ?>
+
