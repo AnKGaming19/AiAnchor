@@ -1,4 +1,3 @@
-
 // ===== ZOHO FLOW CONFIGURATION =====
 const ZOHO_FLOW_WEBHOOK = "https://flow.zoho.eu/20108451502/flow/webhook/incoming?zapikey=1001.eb9b404861107089ba667a27ac5308c4.fa4699e069b31dc6b0a723fbb962567a&isdebug=true";
 
@@ -269,6 +268,20 @@ async function handleFormSubmit(e) {
         
         // Forward to Zoho Flow (non-blocking)
         forwardToZoho(formData);
+        
+        // Forward to n8n Production Webhook (non-blocking)
+        fetch('https://aianchor.app.n8n.cloud/webhook-test/4d0fe820-6feb-4aeb-96b6-1b980dcf7b83', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: formData.get('name'),
+                email: formData.get('email'),
+                company: formData.get('company'),
+                phone: formData.get('phone'),
+                message: formData.get('message'),
+                source: 'AIAnchor Website'
+            })
+        }).catch(() => {});
         
         // Send to Formspree
         const response = await fetch(form.action, {
