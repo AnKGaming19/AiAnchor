@@ -270,7 +270,7 @@ async function handleFormSubmit(e) {
         forwardToZoho(formData);
         
         // Forward to n8n Production Webhook (non-blocking)
-        fetch('https://aianchor.app.n8n.cloud/webhook-test/4d0fe820-6feb-4aeb-96b6-1b980dcf7b83', {
+        fetch('https://aianchor.app.n8n.cloud/webhook/4d0fe820-6feb-4aeb-96b6-1b980dcf7b83', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -459,3 +459,4 @@ window.AIAnchor = {
     showAlert,
     trackEvent
 };
+
