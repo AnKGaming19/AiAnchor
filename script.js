@@ -1,3 +1,6 @@
+// ===== ZOHO FLOW CONFIGURATION =====
+const ZOHO_FLOW_WEBHOOK = "https://flow.zoho.com/XXXX/flow/webhook/incoming?zapikey=YOUR_KEY";
+
 // ===== DOM CONTENT LOADED =====
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
@@ -212,6 +215,25 @@ function setupHeaderScroll() {
     });
 }
 
+// ===== ZOHO FLOW HELPER =====
+function forwardToZoho(formData) {
+    const payload = {
+        name: formData.get("name") || "",
+        email: formData.get("email") || "",
+        company: formData.get("company") || "",
+        phone: formData.get("phone") || "",
+        message: formData.get("message") || "",
+        source: "AIAnchor Website",
+        submittedAt: new Date().toISOString()
+    };
+    
+    fetch(ZOHO_FLOW_WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    }).catch(() => {});
+}
+
 // ===== FORM HANDLING =====
 function setupFormHandling() {
     const form = document.getElementById('contactForm');
@@ -226,6 +248,7 @@ async function handleFormSubmit(e) {
     const form = e.target;
     const submitButton = form.querySelector('button[type="submit"]');
     const originalText = submitButton.innerHTML;
+    const successMessage = document.getElementById('form-success');
     
     // Check honeypot
     const honeypot = form.querySelector('#website');
@@ -242,6 +265,9 @@ async function handleFormSubmit(e) {
         // Prepare form data
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
+        
+        // Forward to Zoho Flow (non-blocking)
+        forwardToZoho(formData);
         
         // Send to Formspree
         const response = await fetch(form.action, {
