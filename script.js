@@ -1,448 +1,214 @@
-// ===== ZOHO FLOW CONFIGURATION =====
-const ZOHO_FLOW_WEBHOOK = "https://flow.zoho.eu/20108451502/flow/webhook/incoming?zapikey=1001.6852a77a4e7cd857efd274c55bd5a711.19facefdd4557bf7a90eb2e64abe8950&isdebug=false";
 
-// ===== DOM CONTENT LOADED =====
-document.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
-});
+/* ===============================
+   AIAnchor – Main Site Script
+   =============================== */
 
-// ===== INITIALIZATION =====
-function initializeApp() {
-    setupMobileMenu();
-    setupSmoothScrolling();
-    setupRevealAnimations();
-    setupFormHandling();
-    setupHeaderScroll();
-}
+document.addEventListener('DOMContentLoaded', () => {
+  /* -------------------------------
+     Mobile menu toggle
+  --------------------------------*/
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const nav = document.querySelector('.nav');
 
-// ===== MOBILE MENU =====
-function setupMobileMenu() {
-    const mobileToggle = document.querySelector('.mobile-menu-toggle');
-    const nav = document.querySelector('.nav');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    if (!mobileToggle || !nav) return;
-    
-    mobileToggle.addEventListener('click', function() {
-        const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-        
-        // Toggle menu state
-        mobileToggle.setAttribute('aria-expanded', !isExpanded);
-        nav.classList.toggle('nav-open');
-        
-        // Toggle hamburger animation
-        const spans = mobileToggle.querySelectorAll('span');
-        if (!isExpanded) {
-            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-        } else {
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
-        }
-        
-        // Trap focus when menu is open
-        if (!isExpanded) {
-            trapFocus(nav);
-        }
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      mobileMenuToggle.classList.toggle('active');
     });
-    
-    // Close menu when clicking on nav links
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            closeMobileMenu();
-        });
+  }
+
+  /* -------------------------------
+     Smooth scrolling for nav links
+  --------------------------------*/
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href');
+      const target = document.querySelector(targetId);
+      if (!target) return;
+
+      const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+      const top = target.offsetTop - headerHeight;
+
+      window.scrollTo({ top, behavior: 'smooth' });
+
+      // close mobile menu if open
+      if (nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+      }
     });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!nav.contains(e.target) && !mobileToggle.contains(e.target)) {
-            closeMobileMenu();
-        }
-    });
-    
-    // Close menu on escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeMobileMenu();
-        }
-    });
-}
+  });
 
-function closeMobileMenu() {
-    const mobileToggle = document.querySelector('.mobile-menu-toggle');
-    const nav = document.querySelector('.nav');
-    const spans = mobileToggle?.querySelectorAll('span');
-    
-    if (mobileToggle && nav) {
-        mobileToggle.setAttribute('aria-expanded', 'false');
-        nav.classList.remove('nav-open');
-        
-        if (spans) {
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
-        }
-    }
-}
+  /* -------------------------------
+     Contact form handling
+  --------------------------------*/
+  const contactForm = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+  const formError = document.getElementById('formError');
 
-function trapFocus(element) {
-    const focusableElements = element.querySelectorAll(
-        'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
-    );
-    
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
-    
-    if (firstElement) {
-        firstElement.focus();
-    }
-    
-    element.addEventListener('keydown', function(e) {
-        if (e.key === 'Tab') {
-            if (e.shiftKey) {
-                if (document.activeElement === firstElement) {
-                    e.preventDefault();
-                    lastElement.focus();
-                }
-            } else {
-                if (document.activeElement === lastElement) {
-                    e.preventDefault();
-                    firstElement.focus();
-                }
-            }
-        }
-    });
-}
+  // === Zoho Flow webhook (your URL) ===
+  const ZOHO_FLOW_WEBHOOK =
+    "https://flow.zoho.eu/20108451502/flow/webhook/incoming?zapikey=1001.6852a77a4e7cd857efd274c55bd5a711.19facefdd4557bf7a90eb2e64abe8950&isdebug=false";
 
-// ===== SMOOTH SCROLLING =====
-function setupSmoothScrolling() {
-    const navLinks = document.querySelectorAll('a[href^="#"]');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// Global scroll functions for onclick handlers
-function scrollToContact() {
-    const contactSection = document.querySelector('#contact');
-    if (contactSection) {
-        const headerHeight = document.querySelector('.header').offsetHeight;
-        const targetPosition = contactSection.offsetTop - headerHeight - 20;
-        
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-        });
-    }
-}
-
-function scrollToResults() {
-    const resultsSection = document.querySelector('#results');
-    if (resultsSection) {
-        const headerHeight = document.querySelector('.header').offsetHeight;
-        const targetPosition = resultsSection.offsetTop - headerHeight - 20;
-        
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-        });
-    }
-}
-
-// ===== REVEAL ANIMATIONS =====
-function setupRevealAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
-    
-    // Observe all elements with reveal class
-    const revealElements = document.querySelectorAll('.reveal');
-    revealElements.forEach(element => {
-        observer.observe(element);
-    });
-}
-
-// ===== HEADER SCROLL EFFECT =====
-function setupHeaderScroll() {
-    const header = document.querySelector('.header');
-    let lastScrollTop = 0;
-    
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Add/remove scrolled class for styling
-        if (scrollTop > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        // Hide/show header on scroll (optional)
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-        }
-        
-        lastScrollTop = scrollTop;
-    });
-}
-
-// ===== ZOHO FLOW HELPER =====
-function forwardToZoho(formData) {
+  // Fire-and-forget forwarder to Zoho Flow
+  function forwardToZoho(formData) {
     const payload = {
-        name: formData.get("name") || "",
-        email: formData.get("email") || "",
-        company: formData.get("company") || "",
-        phone: formData.get("phone") || "",
-        message: formData.get("message") || "",
-        source: "AIAnchor Website",
-        submittedAt: new Date().toISOString()
+      name: formData.get('name') || '',
+      email: formData.get('email') || '',
+      company: formData.get('company') || '',
+      phone: formData.get('phone') || '',
+      message: formData.get('message') || '',
+      source: 'AIAnchor Website',
+      submittedAt: new Date().toISOString()
     };
-    
+
     fetch(ZOHO_FLOW_WEBHOOK, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    }).catch(() => {});
-}
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(() => {
+      // don't block UX if Zoho Flow is unreachable
+    });
+  }
 
-// ===== FORM HANDLING =====
-function setupFormHandling() {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
-    
-    form.addEventListener('submit', handleFormSubmit);
-}
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-async function handleFormSubmit(e) {
-    e.preventDefault();
-    
-    const form = e.target;
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalText = submitButton.innerHTML;
-    const successMessage = document.getElementById('form-success');
-    
-    // Check honeypot
-    const honeypot = form.querySelector('#website');
-    if (honeypot && honeypot.value.trim() !== '') {
-        showAlert('Spam detected. Please try again.', 'error');
-        return;
+      const formData = new FormData(contactForm);
+
+      // Basic validation
+      const name = formData.get('name')?.trim();
+      const email = formData.get('email')?.trim();
+      const company = formData.get('company')?.trim();
+      const message = formData.get('message')?.trim();
+
+      if (!name || !email || !company || !message) {
+        return showError('Please fill in all required fields.');
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return showError('Please enter a valid email address.');
+      }
+
+      // Send to Zoho Flow (auto-reply + CRM, etc.)
+      forwardToZoho(formData);
+
+      // Submit to Formspree (keeps your current pipeline)
+      fetch('https://formspree.io/f/xnnzezlo', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Form submission failed');
+        showSuccess();
+      })
+      .catch(() => showError('Oops, something went wrong. Please try again.'));
+    });
+  }
+
+  function showSuccess() {
+    if (contactForm) contactForm.style.display = 'none';
+    if (formError) formError.style.display = 'none';
+    if (formSuccess) {
+      formSuccess.style.display = 'block';
+      contactForm?.reset();
+      formSuccess.scrollIntoView({ behavior: 'smooth' });
     }
-    
-    // Disable submit button and show loading state
-    submitButton.disabled = true;
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    
-    try {
-        // Prepare form data
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        
-        // Forward to Zoho Flow (non-blocking)
-        forwardToZoho(formData);
-        
-        // Send to Formspree
-        const response = await fetch(form.action, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-        
-        if (response.ok) {
-            showAlert('Thank you! Your message has been sent successfully. We\'ll get back to you soon.', 'success');
-            form.reset();
-            
-            // Scroll to alert
-            setTimeout(() => {
-                const alertContainer = document.getElementById('alertContainer');
-                if (alertContainer) {
-                    alertContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }, 100);
-        } else {
-            throw new Error('Form submission failed');
-        }
-        
-    } catch (error) {
-        console.error('Form submission error:', error);
-        showAlert('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
-    } finally {
-        // Re-enable submit button
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalText;
-    }
-}
+  }
 
-// ===== ALERT SYSTEM =====
-function showAlert(message, type = 'success') {
-    const alertContainer = document.getElementById('alertContainer');
-    if (!alertContainer) return;
-    
-    // Create alert element
-    const alert = document.createElement('div');
-    alert.className = `alert alert-${type}`;
-    alert.setAttribute('role', type === 'success' ? 'status' : 'alert');
-    alert.textContent = message;
-    
-    // Add to container
-    alertContainer.appendChild(alert);
-    
-    // Auto-remove after 5 seconds
-    setTimeout(() => {
-        if (alert.parentNode) {
-            alert.style.opacity = '0';
-            alert.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                if (alert.parentNode) {
-                    alert.parentNode.removeChild(alert);
-                }
-            }, 300);
-        }
-    }, 5000);
-    
-    // Remove on click
-    alert.addEventListener('click', function() {
-        if (alert.parentNode) {
-            alert.parentNode.removeChild(alert);
-        }
+  function showError(message) {
+    if (!formError) return;
+    const p = formError.querySelector('p');
+    if (p) p.textContent = message || 'Something went wrong.';
+    formSuccess && (formSuccess.style.display = 'none');
+    formError.style.display = 'block';
+    formError.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  /* -------------------------------
+     Header scroll effect
+  --------------------------------*/
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    const y = window.pageYOffset || document.documentElement.scrollTop;
+    if (y > 100) header?.classList.add('scrolled');
+    else header?.classList.remove('scrolled');
+  });
+
+  /* -------------------------------
+     Intersection Observer animations
+  --------------------------------*/
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('animate-in');
     });
-}
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-// ===== UTILITY FUNCTIONS =====
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
+  document.querySelectorAll('.step-card, .benefit-item, .testimonial-card')
+    .forEach(el => observer.observe(el));
 
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
-}
-
-// ===== PERFORMANCE OPTIMIZATIONS =====
-// Throttle scroll events
-const throttledScrollHandler = throttle(function() {
-    // Any scroll-based functionality can be added here
-}, 16); // ~60fps
-
-window.addEventListener('scroll', throttledScrollHandler);
-
-// Debounce resize events
-const debouncedResizeHandler = debounce(function() {
-    // Any resize-based functionality can be added here
-}, 250);
-
-window.addEventListener('resize', debouncedResizeHandler);
-
-// ===== ACCESSIBILITY ENHANCEMENTS =====
-// Add skip link functionality
-function setupSkipLinks() {
-    const skipLink = document.createElement('a');
-    skipLink.href = '#main-content';
-    skipLink.textContent = 'Skip to main content';
-    skipLink.className = 'skip-link';
-    skipLink.style.cssText = `
-        position: absolute;
-        top: -40px;
-        left: 6px;
-        background: var(--brand);
-        color: white;
-        padding: 8px;
-        text-decoration: none;
-        border-radius: 4px;
-        z-index: 10000;
-        transition: top 0.3s;
-    `;
-    
-    skipLink.addEventListener('focus', function() {
-        this.style.top = '6px';
-    });
-    
-    skipLink.addEventListener('blur', function() {
-        this.style.top = '-40px';
-    });
-    
-    document.body.insertBefore(skipLink, document.body.firstChild);
-}
-
-// Initialize skip links
-setupSkipLinks();
-
-// ===== ERROR HANDLING =====
-window.addEventListener('error', function(e) {
-    console.error('JavaScript error:', e.error);
-    // You can add error reporting here
+  // Page loaded fade-in
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+  });
 });
 
-// ===== PWA SUPPORT (BASIC) =====
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        // Service worker registration can be added here
-        // navigator.serviceWorker.register('/sw.js');
-    });
+/* ---------------------------------
+   Public helper: scroll to contact
+----------------------------------*/
+function scrollToContact() {
+  const section = document.getElementById('contact');
+  if (!section) return;
+  const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+  const top = section.offsetTop - headerHeight;
+  window.scrollTo({ top, behavior: 'smooth' });
 }
 
-// ===== ANALYTICS READY =====
-// Google Analytics or other tracking can be added here
-function trackEvent(eventName, eventData = {}) {
-    // Example: trackEvent('button_click', { button: 'cta', section: 'hero' });
-    if (typeof gtag !== 'undefined') {
-        gtag('event', eventName, eventData);
-    }
-    // Add other analytics providers as needed
-}
+/* ---------------------------------
+   Small inline styles for effects
+----------------------------------*/
+const style = document.createElement('style');
+style.textContent = `
+  .header.scrolled {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+  }
+  .nav.active {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: #fff;
+    flex-direction: column;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  }
+  .mobile-menu-toggle.active span:nth-child(1){ transform: rotate(45deg) translate(5px,5px); }
+  .mobile-menu-toggle.active span:nth-child(2){ opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3){ transform: rotate(-45deg) translate(7px,-6px); }
 
-// ===== EXPORT FOR GLOBAL USE =====
-window.AIAnchor = {
-    scrollToContact,
-    scrollToResults,
-    showAlert,
-    trackEvent
-};
+  .step-card, .benefit-item, .testimonial-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+  .step-card.animate-in, .benefit-item.animate-in, .testimonial-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  body:not(.loaded){ opacity: 0; }
+  body.loaded{ opacity: 1; transition: opacity 0.5s ease; }
+
+  @media (max-width: 768px) {
+    .nav { display: none; }
+    .nav.active { display: flex; }
+  }
+`;
+document.head.appendChild(style);
+
 
