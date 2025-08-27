@@ -817,6 +817,8 @@ section {
     color: var(--muted);
 }
 
+
+
 /* ===== FOOTER ===== */
 .footer {
     background: var(--panel);
@@ -956,10 +958,6 @@ section {
 @media (max-width: 768px) {
     .container {
         padding: 0 1rem;
-    }
-    
-    .nav {
-        display: none;
     }
     
     .mobile-menu-toggle {
