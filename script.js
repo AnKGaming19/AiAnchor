@@ -1,3 +1,6 @@
+// ===== VERCEL ANALYTICS =====
+import { inject } from "@vercel/analytics";
+
 // ===== ZOHO FLOW CONFIGURATION =====
 const ZOHO_FLOW_WEBHOOK = "https://flow.zoho.eu/20108451502/flow/webhook/incoming?zapikey=1001.eb9b404861107089ba667a27ac5308c4.fa4699e069b31dc6b0a723fbb962567a&isdebug=true";
 
@@ -8,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== INITIALIZATION =====
 function initializeApp() {
+    // Initialize Vercel Analytics
+    inject();
+    
     setupMobileMenu();
     setupSmoothScrolling();
     setupRevealAnimations();
