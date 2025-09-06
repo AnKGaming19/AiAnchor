@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIAnchor - AI Automation Agency | Scale Faster, Work Smarter</title>
+    <meta name="description" content="We build AI automations that capture more leads, close more deals, and free your team from repetitive work. Book your free strategy call today.">
+    <meta name="keywords" content="AI automation, lead generation, business automation, AI agency">
+    <meta name="author" content="AIAnchor">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="brand" aria-label="AIAnchor Home">
+                    <i class="fas fa-anchor"></i>
+                    <span>AIAnchor</span>
+                </a>
+                
+                <nav class="nav" aria-label="Main navigation">
+                    <ul class="nav-list">
+                        <li><a href="#services" class="nav-link">Services</a></li>
+                        <li><a href="#results" class="nav-link">Results</a></li>
+                        <li><a href="#process" class="nav-link">Process</a></li>
+                        <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="btn btn-primary btn-sm" onclick="scrollToContact()">
+                    Book Call
+                </button>
+                
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-background">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+            <div class="grid-glow"></div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title reveal">
+                        Scale faster. <span class="gradient-text">Work smarter.</span> Let AI do the heavy lifting.
+                    </h1>
+                    <p class="hero-subtitle reveal">
+                        We build AI automations that capture more leads, close more deals, and free your team from repetitive work.
+                    </p>
+                    <div class="hero-ctas reveal">
+                        <button class="btn btn-primary btn-lg" onclick="scrollToContact()">
+                            <i class="fas fa-calendar-check"></i>
+                            Book Free Strategy Call
+                        </button>
+                        <button class="btn btn-outline btn-lg" onclick="scrollToResults()">
+                            <i class="fas fa-chart-line"></i>
+                            See Results
+                        </button>
+                    </div>
+                    <div class="trust-bar reveal">
+                        <span class="trust-label">Trusted by:</span>
+                        <div class="trust-logos">
+                            <span class="trust-logo">Codename X</span>
+                            <span class="trust-logo">Temper</span>
+                            <span class="trust-logo">Hearth & Haven</span>
+                            <span class="trust-logo">TechFlow</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image reveal">
+                    <div class="hero-card">
+                        <img src="AIAnchor.jpg" alt="AIAnchor team working on AI automation solutions" loading="eager">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">Comprehensive AI automation solutions to transform your business</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Analyze</h3>
+                    <p>We dive deep into your current processes to identify automation opportunities that will drive the biggest impact.</p>
+                    <ul class="service-features">
+                        <li>Process mapping & analysis</li>
+                        <li>ROI opportunity assessment</li>
+                        <li>Technical feasibility review</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Automate</h3>
+                    <p>We build custom AI automations that seamlessly integrate with your existing tools and workflows.</p>
+                    <ul class="service-features">
+                        <li>Custom AI bot development</li>
+                        <li>API integrations & webhooks</li>
+                        <li>Multi-platform automation</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Scale</h3>
+                    <p>We help you scale your automations across your organization and continuously optimize for better results.</p>
+                    <ul class="service-features">
+                        <li>Team training & onboarding</li>
+                        <li>Performance monitoring</li>
+                        <li>Continuous optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results" id="results">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Proven Results</h2>
+                <p class="section-subtitle">Real metrics from real clients</p>
+            </div>
+            
+            <div class="stats-grid reveal">
+                <div class="stat-card">
+                    <div class="stat-number">+42%</div>
+                    <div class="stat-label">Lead-to-Call Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Hours Saved/Month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3×</div>
+                    <div class="stat-label">Reply Rate</div>
+                </div>
+            </div>
+            
+            <div class="case-studies">
+                <div class="case-card reveal">
+                    <h3>Instagram DM Assistant</h3>
+                    <p>Automated lead qualification and booking for a fitness coaching business</p>
+                    <ul class="case-results">
+                        <li>+67% response rate</li>
+                        <li>85% of leads qualified automatically</li>
+                        <li>40 hours saved per week</li>
+                    </ul>
+                </div>
+                
+                <div class="case-card reveal">
+                    <h3>E-commerce Post-Purchase</h3>
+                    <p>Automated follow-up sequence for an online retail store</p>
+                    <ul class="case-results">
+                        <li>+23% repeat purchase rate</li>
+                        <li>92% customer satisfaction</li>
+                        <li>60% reduction in support tickets</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Our Process</h2>
+                <p class="section-subtitle">Simple, proven approach to AI automation success</p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step reveal">
+                    <div class="step-number">1</div>
+                    <h3>Discovery</h3>
+                    <p>We analyze your current processes, identify automation opportunities, and create a strategic roadmap tailored to your business goals.</p>
+                </div>
+                
+                <div class="process-step reveal">
+                    <div class="step-number">2</div>
+                    <h3>Pilot</h3>
+                    <p>We build and deploy a focused automation pilot to validate the approach and demonstrate immediate value before scaling.</p>
+                </div>
+                
+                <div class="process-step reveal">
+                    <div class="step-number">3</div>
+                    <h3>Scale & Maintain</h3>
+                    <p>We expand successful automations across your organization and provide ongoing optimization and support to maximize ROI.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">What Our Clients Say</h2>
+                <p class="section-subtitle">Real feedback from businesses we've transformed</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-content">
+                        <p>"I tried a marketing agency for the first time ever with you guys and was expecting so much less... you put in the time to do great work and maintain a great relationship."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Codename X</h4>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-content">
+                        <p>"You've been amazing to work with — appreciate the effort you put into helping my brand."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>TemperOfficial</h4>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-content">
+                        <p>"Seamless and enjoyable. Knowledgeable, friendly, and responsive. I feel valued as a client."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Hearth & Haven</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Band -->
+    <section class="cta-band">
+        <div class="container">
+            <div class="cta-content reveal">
+                <h2>Ready to scale your business with AI automation?</h2>
+                <button class="btn btn-primary btn-lg" onclick="scrollToContact()">
+                    <i class="fas fa-calendar-check"></i>
+                    Book Your Free Strategy Call
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Get Started Today</h2>
+                <p class="section-subtitle">Let's discuss how AI automation can transform your business</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info reveal">
+                    <h3>Why Choose AIAnchor?</h3>
+                    <ul class="contact-benefits">
+                        <li><i class="fas fa-check"></i> Proven track record with 50+ clients</li>
+                        <li><i class="fas fa-check"></i> Custom solutions, no cookie-cutter approach</li>
+                        <li><i class="fas fa-check"></i> Ongoing support and optimization</li>
+                        <li><i class="fas fa-check"></i> ROI-focused implementation</li>
+                    </ul>
+                </div>
+                
+                <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/xnnzezlo">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">Company Name *</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number (Optional)</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Tell us about your automation needs *</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    
+                    <!-- Honeypot field -->
+                    <div class="form-group honeypot" style="display: none;">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1">
+                    </div>
+                    
+                    <div class="form-note">
+                        <p>By submitting, you agree to be contacted about AIAnchor services.</p>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="brand" aria-label="AIAnchor Home">
+                        <i class="fas fa-anchor"></i>
+                        <span>AIAnchor</span>
+                    </a>
+                    <p>AI automation solutions that scale your business</p>
+                </div>
+                
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/aianchor_/" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="http://linkedin.com/company/aianchor" aria-label="Connect on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:info@aianchor.online" aria-label="Email us">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 AIAnchor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating CTA -->
+    <button class="floating-cta" onclick="scrollToContact()" aria-label="Book a free strategy call">
+        <i class="fas fa-calendar-check"></i>
+        <span>Book Call</span>
+    </button>
+
+    <!-- Alert Container -->
+    <div id="alertContainer" class="alert-container" role="status" aria-live="polite"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
